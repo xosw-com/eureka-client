@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: eureka-client
+  security:
+    user:
+      name: cloud
+      password: d27cc366-b504-4b2b-b863-7b8cc7ad2fa4
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@121.36.12.44:8761/eureka,http://${spring.security.user.name}:${spring.security.user.password}@121.36.28.204:8761/eureka
+management:
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+info:
+  author.name: zuoyao@xosw.com
+  app.name: microservice
+  server.port: ${server.port}
+  application.name: ${spring.application.name}
+logging:
+  file:
+    path: /opt/software/logs/eureka-client
+    name: eureka-client.log
+    max-size: 10
+    max-history: 7
+    total-size-cap: 0B
+    clean-history-on-start: true
+  level:
+    - org.springframework.jdbc.corev: debug
+    - org.hibernate.SQL: debug
+    - org.jooq.tools.LoggerListener: debug
+  config: classpath:logback-spring.xml
+server:
+  port: 8762
+  servlet:
+    context-path: /
